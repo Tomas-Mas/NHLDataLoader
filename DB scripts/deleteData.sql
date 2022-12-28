@@ -1,0 +1,83 @@
+delete from eventPlayers;
+delete from gameEvents;
+delete from Events;
+delete from rosters;
+delete from skaterStats;
+delete from goalieStats;
+delete from games;
+delete from gameStatus;
+delete from players;
+delete from positions;
+delete from teams;
+delete from venues;
+delete from timeZones;
+delete from conference_teams;
+delete from division_teams;
+delete from conference_division;
+delete from conferences;
+delete from divisions;
+
+--droping fk
+ALTER TABLE Conference_Division drop CONSTRAINT Conference_Div_Con_FK;
+ALTER TABLE Conference_Division drop CONSTRAINT Con_Div_Division_FK;
+alter table Division_Teams drop constraint Division_Teams_Divisions_FK;
+alter table Division_Teams drop constraint Division_Teams_Teams_FK;
+alter table Conference_Teams drop constraint Conference_Teams_Conferences_FK;
+alter table Conference_Teams drop constraint Conference_Teams_Teams_FK;
+ALTER TABLE Games drop CONSTRAINT Games_Teams_FK_Away;
+ALTER TABLE Games drop CONSTRAINT Games_Teams_FK_Home;
+ALTER TABLE Games drop CONSTRAINT Games_GameStatus_FK;
+ALTER TABLE Games drop CONSTRAINT Games_Venues_FK;
+ALTER TABLE Players drop CONSTRAINT Players_Positions_FK;
+ALTER TABLE Players drop CONSTRAINT Players_Teams_FK;
+alter table Teams drop constraint Teams_Division_Teams_FK;
+alter table Teams drop constraint Teams_Conference_Teams_FK;
+ALTER TABLE Teams drop CONSTRAINT Teams_TimeZones_FK;
+ALTER TABLE Teams drop CONSTRAINT Teams_Venues_FK;
+alter table Rosters drop constraint Rosters_Games_FK;
+alter table Rosters drop constraint Rosters_Teams_FK;
+alter table Rosters drop constraint Rosters_Players_FK;
+alter table GameEvents drop constraint GameEvents_Games_FK;
+alter table EventPlayers drop constraint EventPlayers_GameEvents_FK;
+alter table EventPlayers drop constraint EventPlayers_Rosters_FK;
+alter table GameEvents drop constraint GameEvents_Events_FK;
+alter table Rosters drop constraint Rosters_SkaterStats_FK;
+alter table Rosters drop constraint Rosters_GoalieStats_FK;
+
+--dropping tables
+drop table eventPlayers;
+drop table gameEvents;
+drop table Events;
+drop table rosters;
+drop table skaterStats;
+drop table goalieStats;
+drop table games;
+drop table gameStatus;
+drop table players;
+drop table positions;
+drop table teams;
+drop table venues;
+drop table timeZones;
+drop table conference_teams;
+drop table division_teams;
+drop table conference_division;
+drop table conferences;
+drop table divisions;
+
+--dropping sequences
+drop sequence seq_division;
+drop sequence seq_conference;
+drop sequence seq_divisionTeams;
+drop sequence seq_conferenceTeams;
+drop sequence seq_tZone;
+drop sequence seq_position;
+drop sequence seq_team;
+drop sequence seq_venue;
+drop sequence seq_player;
+drop sequence seq_roster;
+drop sequence seq_gameEvents;
+drop sequence seq_events;
+drop sequence seq_game;
+drop sequence seq_skaterStats;
+drop sequence seq_goalieStats;
+

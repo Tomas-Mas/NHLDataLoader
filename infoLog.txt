@@ -1,0 +1,24 @@
+Wed Sep 28 12:10:32 CEST 2022; game id: 2015010001; No away players found
+
+Wed Sep 28 12:10:32 CEST 2022; game id: 2015010001; No home players found
+
+Wed Sep 28 12:10:32 CEST 2022; game id: 2015010001; no events found
+
+Wed Sep 28 12:10:32 CEST 2022; game id: 2015010001; no player stats found
+
+Wed Sep 28 12:10:43 CEST 2022; game id: 2015010012; No away players found
+
+Wed Sep 28 12:10:43 CEST 2022; game id: 2015010012; No home players found
+
+Wed Sep 28 12:10:43 CEST 2022; game id: 2015010012; no events found
+
+Wed Sep 28 12:10:43 CEST 2022; game id: 2015010012; no player stats found
+
+Thu Dec 15 10:10:02 CET 2022; game id: 2015010001; No away players found
+
+Thu Dec 15 10:10:02 CET 2022; game id: 2015010001; No home players found
+
+Thu Dec 15 10:10:02 CET 2022; game id: 2015010001; no events found
+
+Thu Dec 15 10:10:02 CET 2022; game id: 2015010001; no player stats found
+
