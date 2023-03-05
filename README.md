@@ -7,6 +7,6 @@
 
 <p> included in DBScripts folder. </p>
 
-### Db relation model:
+### Db relational model:
 
 ![db relational model](imgs/db_relational_model.png)
