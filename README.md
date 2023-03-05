@@ -10,5 +10,5 @@
 ### Db relation model:
 
 <p>
-  ![db relational model](/imgs/db_relational_model.png)
+  ![db relational model](imgs/db_relational_model.png)
 </p>
