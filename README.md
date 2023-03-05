@@ -9,6 +9,4 @@
 
 ### Db relation model:
 
-<p>
-  ![db relational model](imgs/db_relational_model.png)
-</p>
+![db relational model](imgs/db_relational_model.png)
