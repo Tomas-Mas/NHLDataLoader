@@ -1,21 +1,21 @@
 delete from eventPlayers;
 delete from gameEvents;
-delete from Events;
+delete from events;
 delete from rosters;
-delete from skaterStats;
 delete from goalieStats;
-delete from games;
-delete from gameStatus;
+delete from skaterStats;
 delete from players;
 delete from positions;
+delete from games;
+delete from gamestatus;
+delete from division_teams;
+delete from conference_teams;
+delete from conference_division;
+delete from divisions;
+delete from conferences;
 delete from teams;
 delete from venues;
 delete from timeZones;
-delete from conference_teams;
-delete from division_teams;
-delete from conference_division;
-delete from conferences;
-delete from divisions;
 
 --droping fk
 ALTER TABLE Conference_Division drop CONSTRAINT Conference_Div_Con_FK;
