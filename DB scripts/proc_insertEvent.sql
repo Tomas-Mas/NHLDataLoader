@@ -36,7 +36,7 @@ as
     dPlayer4RosterId integer;
 begin
     savepoint insertEvent_start;
-    
+
    /* if player1Type = 'PlayerID' then
         player1Type := null;
     end if;
@@ -49,26 +49,26 @@ begin
     if player4Type = 'PlayerID' then
         player4Type := null;
     end if;*/
-    
+
     select g_id into dGameId from games where g_jsonId = pGameJsonId;
-    
+
     if eventExist(eventName, eventSecondaryType, goalStrength, goalEmptyNet, pPenaltySeverity, pPenaltyMinutes) = false then
         insert into Events(e_id, name, secondaryType, strength, emptyNet, penaltySeverity, penaltyMinutes) 
             values (seq_events.nextval, eventName, eventSecondaryType, goalStrength, goalEmptyNet, pPenaltySeverity, pPenaltyMinutes);
     end if;
-    
+
     select e_id into dEId from Events where name = eventName and
     ((secondaryType is null and eventSecondaryType is null) OR (secondaryType = eventSecondaryType)) and
     ((strength is null and goalStrength is null) OR (strength = goalStrength)) and
     ((emptyNet is null and goalEmptyNet is null) or (emptyNet = goalEmptyNet)) and
     ((penaltySeverity is null and pPenaltySeverity is null) or (penaltySeverity = pPenaltySeverity)) and
     ((penaltyMinutes is null and pPenaltyMinutes is null) or (penaltyMinutes = pPenaltyMinutes));
-    
+
     if gameEventExist(dGameId, ingameEventId) = false then
         insert into GameEvents(ge_id, gameId, gameEventId, eventId, periodNumber, periodType, periodTime, coordX, coordY)
             values(seq_gameEvents.NEXTVAL, dGameId, ingameEventId, dEId, periodNum, pPeriodType, pPeriodTime, pCoordX, pCoordY);
     end if;
-    
+
     select ge_id into dEventId from GameEvents where gameId = dGameId and gameEventId = ingameEventId and eventId = dEId;
     if player1JsonId != 0 then
         select coalesce(max(p_id), 0) into dPlayer1Id from Players where p_jsonId = player1JsonId;
@@ -114,26 +114,9 @@ begin
             insert into EventPlayers(event_id, roster_id, role) values (dEventId, dPlayer4RosterId, player4Type);
         end if;
     end if;
-    
+
 exception
     when others then
     rollback to insertEvent_start;
     raise;
 end;
-
-execute insertEvent(2015020716, 8473579, 'Scorer', 8475177, 'Assist', 8477506, 'Assist', 8473607, 'Goalie', 'Goal', null, null, null, null, null, 33, 1, 'REGULAR', '05:58', -78, 6);
---[8473579, Scorer, 8475177, Assist, 8477506, Assist, 8473607, Goalie, Goal, 33, 1, REGULAR, 05:58, -78, 6]
-
-execute insertEvent(2015020716, 8473579, 'Scorer', 8475177, 'Assist', 8477506, 'Assist', 8473607, 'Goalie', 'Goal', 'Slap Shot', null, null, null, null, 33, 1, 'REGULAR', '05:58', -78, 6);
-
-execute insertEvent(2015020716, 8476393, 'Winner', 8471996, 'Loser', 0, 'N/A', 0, 'N/A', 'Faceoff', null, null, null, null, null, 34, 1, 'REGULAR', '05:58', 0, 0);
---[8476393, Winner, 8471996, Loser, Faceoff, 34, 1, REGULAR, 05:58, 0, 0]
-
-execute insertEvent(2015020716, 8476116, 'Shooter', 8475831, 'Goalie', 0, 'N/A', 0, 'N/A', 'Shot', null, null, null, null, null, 34, 1, 'REGULAR', '19:34', -85, 23);
---[8476116, Shooter, 8475831, Goalie, Shot, null, 2, REGULAR, 19:34, -85, 23]
-
-execute insertEvent(2015020716, 8476116, 'Shooter', 8475831, 'Goalie', 0, 'N/A', 0, 'N/A', 'Shot', 'Wrist Shot', null, null, null, null, 34, 1, 'REGULAR', '19:34', -85, 23);
---[8475155, Shooter, 8475831, Goalie, Shot, Wrist Shot, null, null, null, null, 3, REGULAR, 17:58, 5, 0]
-
-execute insertEvent(2015010032, 8475225, 'Shooter', 9000011, 'Goalie', 0, 'N/A', 0, 'N/A', 'Shot', 'Wrist Shot', null, null, null, null, 194, 2, 'REGULAR', '12:29', 72, 11);
---[8475225, Shooter, 9000011, Goalie, Shot, Wrist Shot, null, null, null, null, 2, REGULAR, 12:29, 72, 11]
