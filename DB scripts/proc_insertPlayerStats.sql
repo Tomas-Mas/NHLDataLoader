@@ -25,10 +25,10 @@ as
     ssRow SkaterStats%ROWTYPE;
 begin
     savepoint insertPlayerStats_start;
-    
+
     select r_id into rosterId from (rosters inner join games on games.g_id=rosters.g_id) inner join Players on Players.p_id=Rosters.p_id 
         where games.g_jsonId = gameJsonId and players.p_jsonId = playerJsonId;
-        
+
     if goalieStatsExist(rosterId) = false and gTimeOnIce is not null then
         goalieStatsId := seq_goalieStats.nextVal;
         insert into GoalieStats(gs_id, timeOnIce, penaltyMinutes, shots, saves, ppShots, ppSaves, shShots, shSaves)
@@ -62,7 +62,7 @@ begin
             update GoalieStats set shSaves = gShSaves where gs_id = goalieStatsId;
         end if;
     end if;
-    
+
     if skaterStatsExist(rosterId) = false and sTimeOnIce is not null then
         skaterStatsId := seq_skaterStats.nextVal;
         insert into SkaterStats(ss_id, timeOnIce, ppTimeOnIce, shTimeOnIce, penaltyMinutes, plusMinus)
@@ -87,19 +87,9 @@ begin
             update SkaterStats set plusMinus = sPlusMinus where ss_id = skaterStatsId;
         end if;
     end if;
-    
+
 exception
     when others then
     rollback to insertPlayerStats_start;
     raise;
 end;
-
-execute insertPlayerStats(2015020704, 8475883, '59:57', 0, 24, 24, 4, 1, 1, 4, null, null, null, null, null);
-execute insertPlayerStats(2015020704, 8475883, '14:57', 33, 32, 31, 30, 29, 28, 27, null, null, null, null, null);
---20152016 8475883:[59:57, 0, 24, 24, 4, 1, 1, 4]
-
-execute insertPlayerStats(2015020704, 8476312, null, null, null, null, null, null, null, null, '22:27', '0:38', '2:44', 4, 2);
-
-
-execute insertPlayerStats(2015020704, 8476312, null, null, null, null, null, null, null, null, '66:27', '66:38', '66:44', 66, 66);
---Skater 8476312:[22:27, 0, 0, 4, 0, 0, 2, 0:38, 2:44]
